@@ -20,3 +20,6 @@ function whisper(str){
 }
 
 console.log(whisper("The KITTENS are SLEEPING!"));
+console.log(whisper("The KITTENS are SLEEPING"));
+console.log(whisper("The KITTENS are SLEEPING!"));
+console.log(whisper("The KITTENS are SLEEPING"));
