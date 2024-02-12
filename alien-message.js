@@ -47,5 +47,6 @@ function reverseStringsInArray(arr){
 }
 
 
+
 console.log(reverseString(title));
 console.log(reverseStringsInArray(messages));
