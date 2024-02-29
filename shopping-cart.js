@@ -48,9 +48,6 @@ function total(arr){
     return arr.reduce((acc, item) => {
         return acc + item.price;
     }, 0).toFixed(2);
-
-
-    
 }
 
 console.log(total(shoppingCart));
