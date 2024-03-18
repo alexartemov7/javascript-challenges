@@ -29,7 +29,8 @@ const podcasts = [
         rating: 8,
         paid: true
     },
-    {
+    {   
+        id: 4,
         title: "Crime Crime Crime", 
         duration: 70, 
         tags: ["crime", "entertainment", "mature"], 
@@ -39,6 +40,7 @@ const podcasts = [
         paid: true
     },
     {
+        id: 5,
         title: "Something about Witches", 
         duration: 35, 
         tags: ["fantasy", "entertainment"], 
@@ -48,6 +50,7 @@ const podcasts = [
         paid: false
     },
     {
+        id: 6,
         title: "Coding Corner", 
         duration: 55, 
         tags: ["education", "jobs", "technology"], 
@@ -58,36 +61,50 @@ const podcasts = [
     },
 ]
 
-/* Night at the Scrimbies 
+/* 🌴 Save the Weekend 🌴
 
-It's time for the Scrimbies, a prestigious award show for podcast hosts.
-We need to assemble a list of podcast hosts so we can start handing out awards. 
+Your best friend is a copywriter who writes product descriptions 
+for a living. You want to use your hacking skills to help them 
+automate their job so you both can spend the weekend on a 
+tropical island. 
 
-Write a function that takes in the podcast data and
-returns a flat array of podcast hosts. There are quite a few ways to approach
-this, but try solving the problem using reduce(). 
+Use array methods and the existing podcast data to write a function that
+can generate a description for each podcast. 
 
-Once you have a flat array of hosts, write a second function to randomly assign each host a prize
-from the awards array. 
+Add the description as a new property on each podcast object, and return
+a new podcast array where each podcast has a description. 
 
-Example output: ["🏆 Alex Booker", "⭐ Bob Smith", "💎 Camilla Lambert" ...] 
-*/
+Each description should look like this: 
+[
+    {
+        id: 1,
+        title: "Scrimba Podcast", 
+        ...
+        description: "Scrimba Podcast is a 50 minute education podcast hosted 
+        by Alex Booker."
+    }
+    ...
+]
 
-const awards = ["🏆", "⭐", "💎", "🥇", "👑"];
+If the podcast has more than one host, you can display only the first host.
 
-function getHosts(data){
-    return data.reduce((acc, item) => {
-        return acc.concat(item.hosts);
-    }, []);
+Stretch goal: Display all three hosts in the description, seperated with commas: 
+
+Example description: "Coding Corner is a 55 minute education podcast hosted by Treasure Porth, Guil Hernandez, and Tom Chant."
+*/ 
+
+function createDescriptionsFor(data){
+    return data.map(podcast => {
+        let hosts = podcast.hosts
+        if (hosts.length > 1){
+            hosts = hosts.slice(0, hosts.length - 1).join(", ") + " and " + hosts.slice(-1)
+        } else {
+            hosts = hosts[0]
+        }
+        podcast.description = `${podcast.title} is a ${podcast.duration} minute ${podcast.genre} podcast hosted by ${hosts}.`
+        return podcast
+    })
+   
 }
 
-function assignAwards(data){
-    const hosts = getHosts(data);
-    return hosts.map(host => {
-        return `${awards[Math.floor(Math.random() * awards.length)]} ${host}`;
-    });
-    
-}
-
-console.log(getHosts(podcasts));
-console.log(assignAwards(podcasts));
+console.log(createDescriptionsFor(podcasts))
